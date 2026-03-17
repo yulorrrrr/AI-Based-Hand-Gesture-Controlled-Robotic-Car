@@ -95,10 +95,10 @@ AI-Based Hand Gesture Controlled Robotic Car/
  
 ## Dataset
  
-- **Total training images:** 2,500 (500 per class)
+- **Total training images:** 5000 (500 per class)
 - **Classes:** Down, Fist, Left, Right, Up
 - **Image size:** Resized to 128×128 RGB
-- **Source:** Custom collected — photos taken by the team
+- **Source:** The dataset was constructed by recording gesture videos and extracting frames using a video frame extraction tool. Approximately 100 frames were sampled per video.
  
 ### Data Augmentation (applied during training)
 - Random rotation (±15°)
