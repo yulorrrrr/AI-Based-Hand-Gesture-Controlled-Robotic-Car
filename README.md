@@ -32,39 +32,39 @@ This project uses a custom-trained CNN to classify 5 hand gestures captured via 
 Camera Input
      │
      ▼
-┌─────────────────────┐
-│   CNN Model         │  ← PyTorch (trained on custom dataset)
-│   Image Classification│
-└─────────────────────┘
+┌──────────────────────────┐
+│   CNN Model              │  ← PyTorch (trained on custom dataset)
+│   Image Classification   │
+└──────────────────────────┘
      │
      ▼ Gesture Label
-┌─────────────────────┐
-│   Raspberry Pi      │  ← Runs inference, sends serial commands
-└─────────────────────┘
+┌──────────────────────────┐
+│      Raspberry Pi        │  ← Runs inference, sends serial commands
+└──────────────────────────┘
      │ Serial (USB)
      ▼
-┌─────────────────────┐
-│   Arduino           │  ← Controls motor driver
-└─────────────────────┘
+┌──────────────────────────┐
+│         Arduino          │  ← Controls motor driver
+└──────────────────────────┘
      │
      ▼
-┌─────────────────────┐
-│   Robotic Car       │  ← Moves based on gesture
-└─────────────────────┘
+┌──────────────────────────┐
+│      Robotic Car         │  ← Moves based on gesture
+└──────────────────────────┘
 ```
  
 ---
  
 ## Gestures
  
-| Gesture | Label | Car Action |
-|---------|-------|------------|
-| ✊ Fist  | `Fist`  | Stop       |
-| ✋ Up    | `Up`    | Forward    |
-| 🫳 Down  | `Down`  | Backward   |
-| 🫲 Left  | `Left`  | Turn Left  |
-| 🫱 Right | `Right` | Turn Right |
- 
+| Gesture | Label | Car Action | Number |
+|---------|-------|------------|--------|
+| 🫳 Down  | `Down`  | Backward   | 0 |
+| ✊ Fist  | `Fist`  | Stop       | 1 |
+| 🫲 Left  | `Left`  | Turn Left  | 2 |
+| 🫱 Right | `Right` | Turn Right | 3 |
+| ✋ Up    | `Up`    | Forward    | 4 |
+
 ## Project Structure
  
 ```
@@ -101,7 +101,6 @@ AI-Based Hand Gesture Controlled Robotic Car/
 - **Source:** Custom collected — photos taken by the team
  
 ### Data Augmentation (applied during training)
-- Random horizontal flip
 - Random rotation (±15°)
 - Color jitter (brightness & contrast)
 - Normalization: mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]
@@ -145,13 +144,14 @@ Input (3, 128, 128)
 The following hardware integration is planned for the next phase:
  
 ### Components
-- **Raspberry Pi 5 8GB** — runs the trained CNN model and camera input
-- **Arduino Uno** — receives serial commands, controls motor driver
-- **Pi Camera OV5647** — real-time hand gesture capture
-- **L298N Motor Driver** — drives 4 DC motors
-- **Robotic Car Chassis** — 4WD platform
-- **Power Bank / Battery Pack** — powers Raspberry Pi
-- **9V Battery** — powers Arduino + motors
+- **Raspberry Pi 5 8GB** - runs the trained CNN model and camera input
+- **Arduino Uno** - receives serial commands, controls motor driver
+- **Pi Camera OV5647** - real-time hand gesture capture
+- **HC - 06 Bluetoo Module** - connect raspberry pi and arduino 
+- **4 MG90S Motor Driver** - drives 4 DC motors
+- **Robotic Car Chassis** - 4WD platform
+- **Power Bank / Battery Pack** - powers Raspberry Pi
+- **9V Battery** - powers Arduino + motors
  
 ### Communication Flow
 - Raspberry Pi captures frame → runs inference → sends command string over serial (e.g., `"FORWARD"`)
