@@ -86,7 +86,7 @@ def train(train_data):
     model = ImageModel()
     criterion = nn.CrossEntropyLoss() #cross entropy loss = softmax() + loss computation
     optimizer = optim.Adam(model.parameters(), lr=0.0005)
-    epochs = 10
+    epochs = 20
     
     #training loop
     model.train() #set the model to training mode
